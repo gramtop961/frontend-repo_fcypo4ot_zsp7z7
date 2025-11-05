@@ -1,28 +1,34 @@
-import { useState } from 'react'
+import Hero from './components/Hero';
+import About from './components/About';
+import Work from './components/Work';
+import Contact from './components/Contact';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen w-full bg-[#0b0d12] text-white antialiased">
+      {/* Global subtle vignette */}
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(1200px_800px_at_50%_-10%,rgba(34,211,238,0.08),transparent_60%)]" />
+
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-black/30 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <a href="#home" className="text-sm font-semibold tracking-wider text-cyan-200">AF</a>
+          <nav className="hidden gap-6 text-sm text-zinc-300 md:flex">
+            <a href="#about" className="hover:text-white hover:underline/20">About</a>
+            <a href="#work" className="hover:text-white hover:underline/20">Work</a>
+            <a href="#contact" className="hover:text-white hover:underline/20">Contact</a>
+          </nav>
+          <a href="#contact" className="rounded-md border border-cyan-500/30 bg-white/5 px-3 py-1.5 text-xs text-cyan-100 hover:border-cyan-400/60">Get in touch</a>
         </div>
-      </div>
+      </header>
+
+      <main>
+        <Hero />
+        <About />
+        <Work />
+        <Contact />
+      </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
