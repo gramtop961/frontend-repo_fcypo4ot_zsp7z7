@@ -4,13 +4,13 @@ import Spline from '@splinetool/react-spline';
 export default function Hero() {
   return (
     <section id="home" className="relative min-h-[90vh] w-full overflow-hidden bg-[#0b0d12]">
-      {/* Subtle radial gradient background */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1000px_600px_at_80%_20%,rgba(56,189,248,0.10),transparent_60%)]" />
+      {/* Minimal soft vignette (non-blocking) */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_600px_at_50%_0%,rgba(34,211,238,0.06),transparent_60%)]" />
 
-      {/* 3D Spline Scene */}
+      {/* Simple interactive Spline cover background */}
       <div className="absolute inset-0">
         <Spline
-          scene="https://prod.spline.design/FduaNp3csZktbOi3/scene.splinecode"
+          scene="https://prod.spline.design/zhZFnwyOYLgqlLWk/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </div>
@@ -30,7 +30,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
-          className="text-4xl font-semibold leading-tight text-white md:text-6xl lg:text-7xl"
+          className="pt-16 text-4xl font-semibold leading-tight text-white md:text-6xl lg:text-7xl"
         >
           Hi, I’m <span className="relative">
             <span className="relative z-10 bg-gradient-to-r from-cyan-300 via-sky-300 to-indigo-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">Aditya Faisal</span>
