@@ -1,97 +1,75 @@
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUp, Linkedin, Dribbble, Link as LinkIcon, Mail } from 'lucide-react';
+import { Send, Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
   return (
-    <section id="contact" className="relative z-10 bg-[#0b0d12] py-20">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_500px_at_30%_80%,rgba(34,211,238,0.10),transparent_60%)]" />
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-12 flex items-end justify-between">
-          <h2 className="text-2xl font-semibold tracking-tight text-white md:text-3xl">
-            Let’s create something amazing together
-            <span className="ml-3 h-6 w-px bg-gradient-to-b from-cyan-400/70 to-transparent align-middle inline-block" />
-          </h2>
+    <section id="contact" className="relative w-full bg-[#0b0d12] py-24 text-white">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div className="absolute inset-0 opacity-40" style={{
+          background: 'radial-gradient(40% 40% at 10% 0%, rgba(59,130,246,0.12), transparent 60%), radial-gradient(30% 30% at 100% 80%, rgba(34,211,238,0.10), transparent 60%)'
+        }} />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-4xl px-6">
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Let’s build something</h2>
+          <p className="mt-3 text-white/80">Have an idea or role in mind? I’m open to exciting opportunities and collaborations.</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-          {/* Form */}
-          <motion.form
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="rounded-xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_0_35px_rgba(34,211,238,0.12)]"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <div className="grid grid-cols-1 gap-5">
-              <div>
-                <label className="mb-1 block text-sm text-zinc-300">Name</label>
-                <input
-                  type="text"
-                  className="w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-white placeholder:text-zinc-500 focus:border-cyan-400/60 focus:outline-none"
-                  placeholder="Your name"
-                  required
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm text-zinc-300">Email</label>
-                <input
-                  type="email"
-                  className="w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-white placeholder:text-zinc-500 focus:border-cyan-400/60 focus:outline-none"
-                  placeholder="you@example.com"
-                  required
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm text-zinc-300">Message</label>
-                <textarea
-                  rows={5}
-                  className="w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-white placeholder:text-zinc-500 focus:border-cyan-400/60 focus:outline-none"
-                  placeholder="Tell me about your project..."
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="group relative inline-flex w-fit items-center gap-2 rounded-md bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-black shadow-[0_0_30px_rgba(34,211,238,0.35)] transition-transform hover:scale-[1.01]"
-              >
-                <Mail className="h-4 w-4" /> Send Message
-                <span className="absolute inset-0 rounded-md bg-cyan-400/40 blur-md" aria-hidden />
-              </button>
-            </div>
+        <div className="grid gap-8 md:grid-cols-2">
+          <motion.form onSubmit={onSubmit} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <label className="mb-4 block text-sm">
+              <span className="mb-1 block text-white/70">Name</span>
+              <input value={form.name} onChange={(e)=>setForm({...form, name:e.target.value})} className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder:text-white/40 outline-none focus:ring-2 focus:ring-cyan-400/40" placeholder="Your name" />
+            </label>
+            <label className="mb-4 block text-sm">
+              <span className="mb-1 block text-white/70">Email</span>
+              <input type="email" value={form.email} onChange={(e)=>setForm({...form, email:e.target.value})} className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder:text-white/40 outline-none focus:ring-2 focus:ring-cyan-400/40" placeholder="you@example.com" />
+            </label>
+            <label className="mb-4 block text-sm">
+              <span className="mb-1 block text-white/70">Message</span>
+              <textarea rows={5} value={form.message} onChange={(e)=>setForm({...form, message:e.target.value})} className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white placeholder:text-white/40 outline-none focus:ring-2 focus:ring-cyan-400/40" placeholder="Tell me about your project" />
+            </label>
+            <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 text-sm font-medium text-[#0b0d12] shadow-[0_10px_30px_-12px_rgba(34,211,238,0.6)] transition hover:bg-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/60">
+              {sent ? 'Sent!' : (<><span>Send Message</span><Send className="h-4 w-4" /></>)}
+            </button>
           </motion.form>
 
-          {/* Socials */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center gap-6"
-          >
-            <p className="max-w-md text-zinc-400">
-              I’m available for product design, interface design, and design systems work. Let’s discuss how we can build something impactful.
-            </p>
-            <div className="flex items-center gap-3">
-              <a href="#" className="inline-flex items-center gap-2 rounded-md border border-cyan-400/30 bg-white/5 px-3 py-2 text-sm text-cyan-100 hover:border-cyan-400/60">
-                <Linkedin className="h-4 w-4" /> LinkedIn
-              </a>
-              <a href="#" className="inline-flex items-center gap-2 rounded-md border border-cyan-400/30 bg-white/5 px-3 py-2 text-sm text-cyan-100 hover:border-cyan-400/60">
-                <Dribbble className="h-4 w-4" /> Dribbble
-              </a>
-              <a href="#" className="inline-flex items-center gap-2 rounded-md border border-cyan-400/30 bg-white/5 px-3 py-2 text-sm text-cyan-100 hover:border-cyan-400/60">
-                <LinkIcon className="h-4 w-4" /> Behance
-              </a>
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.05 }} className="flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <div>
+              <h3 className="text-lg font-medium">Connect</h3>
+              <p className="mt-2 text-white/80">I’m most active on GitHub and LinkedIn. Email works too.</p>
+
+              <div className="mt-5 grid gap-3 text-sm">
+                <a className="group inline-flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/80 transition hover:bg-white/10" href="https://github.com" target="_blank" rel="noreferrer">
+                  <Github className="h-4 w-4 text-white/70" />
+                  github.com/adityafaisal
+                </a>
+                <a className="group inline-flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/80 transition hover:bg-white/10" href="https://linkedin.com" target="_blank" rel="noreferrer">
+                  <Linkedin className="h-4 w-4 text-white/70" />
+                  linkedin.com/in/adityafaisal
+                </a>
+                <a className="group inline-flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-white/80 transition hover:bg-white/10" href="mailto:hello@adityafaisal.dev">
+                  <Mail className="h-4 w-4 text-white/70" />
+                  hello@adityafaisal.dev
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-8 flex items-center justify-between">
+              <span className="text-xs text-white/50">© {new Date().getFullYear()} Aditya Faisal</span>
+              <a href="#top" className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs text-cyan-200 transition hover:bg-cyan-300/20">Back to top ↑</a>
             </div>
           </motion.div>
-        </div>
-
-        {/* Footer + back to top */}
-        <div className="mt-16 flex items-center justify-between border-t border-white/10 pt-6 text-xs text-zinc-500">
-          <span>© {new Date().getFullYear()} AF — All rights reserved.</span>
-          <a href="#home" className="group inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-white/5 px-3 py-1.5 text-cyan-100 hover:border-cyan-400/60">
-            <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" /> Back to top
-          </a>
         </div>
       </div>
     </section>
